@@ -8,7 +8,7 @@
   
   <script lang="ts">
   import { defineComponent, type PropType } from 'vue';
-  import { type ProjectSchema } from '@/composables/firebase/ProjectsSchema/ProjectSchemas';
+  import { type ProjectSchema } from '@/composables/firebaseComposables/Firestore/ProjectsSchema/ProjectSchemas';
   
   export default defineComponent({
     props: {

@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue';
 import ProjectCard from '@/components/ProjectCard.vue'; // Replace with actual import
-import type { ProjectSchema } from '@/composables/firebase/ProjectsSchema/ProjectSchemas';
-import { readProjects } from '@/composables/firebase/ProjectsSchema/ProjectOps';
+import type { ProjectSchema } from '@/composables/firebaseComposables/Firestore/ProjectsSchema/ProjectSchemas';
+import { readProjects } from '@/composables/firebaseComposables/Firestore/ProjectsSchema/ProjectOps';
 
 export default defineComponent({
   name: 'ProjectsView',
@@ -65,4 +65,4 @@ export default defineComponent({
     padding: 20px;
   }
   </style>
-  
+  @/composables/firebase/Firestore/ProjectsSchema/ProjectSchemas@/composables/firebase/Firestore/ProjectsSchema/ProjectOps
