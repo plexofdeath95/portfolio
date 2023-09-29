@@ -18,9 +18,11 @@ export default defineComponent({
    default: false
   }
  },
- setup(props) {
+ emits: ['item-clicked'],
+ setup(props, {emit}) {
   const router = useRouter()
   const onClickRouteTo = () => {
+    emit('item-clicked');
     router.push(props.link)
   }
   return {
@@ -77,6 +79,28 @@ export default defineComponent({
 
 .itemLink.selected a {
     color: var(--white); /* using white variable instead of #fff */
+}
+
+@media (max-width: 992px) {
+    .itemLink {
+        padding: 0 5px; 
+        height: 50px; 
+    }
+    .itemLink a {
+        font-size: 1.5rem; 
+    }
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .itemLink {
+        padding: 0 5px; /* Reduce padding or make other adjustments */
+        height: 40px; /* or whatever is appropriate for mobile */
+    }
+
+    .itemLink a {
+        font-size: 1.5rem; 
+    }
 }
 </style>
 
