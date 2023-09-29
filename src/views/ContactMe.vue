@@ -9,24 +9,32 @@ export default defineComponent({
       email: '',
       message: ''
     })
+    const submitted = ref(false); // ref to determine whether the form has been submitted
+    const error = ref(''); // ref to store error messages
 
     const formattedJSON = computed(() => JSON.stringify(form.value, null, 2))
     const formattedJSONLines = computed(() => formattedJSON.value.split('\n'))
 
     const submitForm = () => {
+      if(!form.value.name || !form.value.email || !form.value.message) {
+        error.value = 'All fields are required!';
+        return;
+      }
       // Handle form submission
+      // After successful submission
+      submitted.value = true; // set submitted to true after successful form submission
+      error.value = ''; // clear error messages after successful form submission
     }
 
-    return { form, formattedJSONLines, submitForm }
+    return { form, formattedJSONLines, submitForm, submitted, error }
   }
 })
 </script>
-
 <template>
   <main class="contact-main">
     <div class="contact-wrapper">
       <h1>Contact Me</h1>
-      <div class="contact-section">
+      <div v-if="!submitted" class="contact-section">
         <div class="left">
           <form @submit.prevent="submitForm">
             <label for="name">Name:</label>
@@ -37,7 +45,9 @@ export default defineComponent({
 
             <label for="message">Message:</label>
             <textarea v-model="form.message" id="message" required></textarea>
-
+            
+            <span v-if="error">{{ error }}</span> <!-- Display error message if any -->
+            
             <button type="submit">Send</button>
           </form>
         </div>
@@ -48,6 +58,9 @@ export default defineComponent({
             </pre>
           </div>
         </div>
+      </div>
+      <div v-if="submitted">
+        <p>Thank you for contacting me. I will get back to you soon!</p>
       </div>
     </div>
   </main>

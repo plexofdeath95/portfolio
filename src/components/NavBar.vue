@@ -14,26 +14,30 @@ watchEffect(() => {
 const routeIndex = {
   '/': 0,
   '/about': 1,
-  '/contact': 2
+  '/contact': 2,
+  '/Projects': 3
 }
 
 const routeText = {
   '/': '_hello',
   '/about': '_about-me',
-  '/contact': '_contact-me'
+  '/contact': '_contact-me',
+  '/Projects': '_Projects'
 }
 
 const routeLink = {
   '/': '/',
   '/about': '/about',
-  '/contact': '/contact'
+  '/contact': '/contact',
+  '/Projects': '/Projects'
 }
 
 const routeSelected = computed(() => {
   return {
     '/': currentRoute.value === '/',
     '/about': currentRoute.value === '/about',
-    '/contact': currentRoute.value === '/contact'
+    '/contact': currentRoute.value === '/contact',
+    '/Projects': currentRoute.value === '/Projects'
   }
 })
 </script>
@@ -55,6 +59,12 @@ const routeSelected = computed(() => {
         :link="routeLink['/contact']"
         :text="routeText['/contact']"
         :selected="routeSelected['/contact']"
+      />
+
+      <ItemLinkComponent
+        :link="routeLink['/Projects']"
+        :text="routeText['/Projects']"
+        :selected="routeSelected['/Projects']"
       />
     </div>
 
