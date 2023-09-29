@@ -64,14 +64,14 @@ const routeSelected = computed(() => {
 
 <style scoped>
 .navbar {
-  background-color: #011627;
+  background-color: var(--primary-bg);
   height: 56px;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
-  border: 1px solid #1e2d3d;
+  border: 1px solid var(--border-color);
   display: flex;
   justify-content: space-around;
 }
@@ -83,7 +83,8 @@ const routeSelected = computed(() => {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border-left: 1px solid #1e2d3d;
+  border-left: 1px solid var(--border-color);
   margin: 0 auto;
 }
 </style>
+

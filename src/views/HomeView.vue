@@ -73,6 +73,7 @@ main {
   min-height: 90vh;
   margin: 0;
   padding: 0;
+  background-color: var(--primary-bg);
 }
 
 .wrapper {
@@ -87,18 +88,16 @@ main {
 /* Mobile View */
 @media (max-width: 767px) {
   .wrapper {
-    flex-direction: column; /* stack the child divs vertically */
+    flex-direction: column;
     min-width: 100%;
   }
 
-  .text,
-  .contentTwo {
-    margin-bottom: 1rem; /* space between the child divs */
+  .text, .contentTwo {
+    margin-bottom: 1rem;
   }
 }
 
-.text,
-.contentTwo {
+.text, .contentTwo {
   flex: 1;
   position: relative;
 }
@@ -121,29 +120,27 @@ main {
 }
 
 .terminal {
-  background-color: #011627;
-  color: #e5e9f0;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
   padding: 1rem;
   border-radius: 8px;
   overflow: auto;
   font-family: 'Fira Code', monospace;
   width: 80%;
-  border: 1px solid #e5e9f0;
+  border: 1px solid var(--primary-text);
 }
 
 .terminal-header {
-  color: #21c978;
+  color: var(--accent-color);
   font-weight: bold;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #E5E9F0;
+  border-bottom: 1px solid var(--primary-text);
 }
 
-.typewriter-enter-active,
-.typewriter-leave-active {
+.typewriter-enter-active, .typewriter-leave-active {
   transition: opacity 0.5s;
 }
-.typewriter-enter, 
-.typewriter-leave-to {
+.typewriter-enter, .typewriter-leave-to {
   opacity: 0;
 }
 </style>

@@ -11,13 +11,13 @@
   
   <style scoped>
   .tech-stack-card {
-    background-color: #FEA55F;
+    background-color: var(--button-bg);
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--shadow-color);
     padding: 16px;
     text-align: center;
     transition: 0.3s;
-    color: #01080E;
+    color: var(--button-text);
   }
   
   .tech-stack-card:hover {
@@ -27,6 +27,6 @@
   .tech-stack-name {
     font-size: 18px;
     font-weight: 600;
+    color: var(--button-text); 
   }
-  </style>
-  
+</style>

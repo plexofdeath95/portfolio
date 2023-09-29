@@ -48,7 +48,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   min-height: 90vh;
-  background-color: #011627;
+  background-color: var(--primary-bg);
 }
 
 .about-wrapper {
@@ -58,7 +58,7 @@ export default defineComponent({
   padding: 2rem;
   text-align: center;
   border-radius: 20px;
-  box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 15px 5px var(--shadow-color);
   background: url('/bg_grad.png') no-repeat center center;
   background-size: cover;
 }
@@ -74,7 +74,7 @@ export default defineComponent({
 }
 
 h1, h2, p {
-  color: #fff;
+  color: var(--white);
 }
 
 .tech-stack-section {
@@ -88,15 +88,15 @@ h1, h2, p {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
   padding: 40px;
-  background-color: #051D2F;
+  background-color: var(--secondary-bg);
   border-radius: 20px;
 }
 
 .btn-contact {
   background-color: transparent;
-  border: 1px solid #fff;
+  border: 1px solid var(--white);
   border-radius: 8px;
-  color: #fff;
+  color: var(--white);
   padding: 8px 16px;
   font-size: 16px;
   margin-top: 20px;

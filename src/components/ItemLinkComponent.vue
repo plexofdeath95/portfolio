@@ -46,7 +46,7 @@ export default defineComponent({
     padding: 0 10px;
     width:100%;
     height:100%;
-    border-left: 1px solid #1E2D3D;
+    border-left: 1px solid var(--border-color);
     margin: auto auto;
     justify-content: left;
     display:flex;
@@ -54,15 +54,15 @@ export default defineComponent({
 
 .itemLink:hover {
     cursor: pointer;
-    border-bottom: 3px solid #FEA55F;
+    border-bottom: 3px solid var(--button-bg); 
 }
 
 .itemLink:hover a {
-    color: #fff; /* Or the color you prefer when hovered */
+    color: var(--white); 
 }
 
 .itemLink a {
-    color: #607B96;
+    color: var(--secondary-text);
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 500;
@@ -72,11 +72,11 @@ export default defineComponent({
 }
 
 .itemLink.selected {
-    border-bottom: 3px solid #FEA55F;
+    border-bottom: 3px solid var(--button-bg);
 }
 
 .itemLink.selected a {
-    color: #fff;
+    color: var(--white); /* using white variable instead of #fff */
 }
-
 </style>
+

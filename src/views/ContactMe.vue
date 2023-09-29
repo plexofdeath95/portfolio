@@ -59,7 +59,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   min-height: 90vh;
-  background-color: #011627;
+  background-color: var(--primary-bg);
 }
 
 .contact-wrapper {
@@ -69,12 +69,12 @@ export default defineComponent({
   padding: 2rem;
   text-align: center;
   border-radius: 20px;
-  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
-  background: #fff;
+  box-shadow: 0px 0px 15px 5px var(--shadow-color);
+  background: var(--white);
 }
 
 h1 {
-  color: #011627;
+  color: var(--primary-bg);
 }
 
 .contact-section {
@@ -91,18 +91,17 @@ h1 {
   }
 }
 
-.left,
-.right {
+.left, .right {
   flex: 1;
   padding: 20px;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #f9f9f9; /* You might want to consider adding a new variable for this color */
   margin:20px
 }
 
 .right {
-  background-color: #011627;
-  color: #21c978;
+  background-color: var(--primary-bg);
+  color: var(--accent-color);
   overflow-y: auto;
   font-family: 'Fira Code', monospace;
   align-items: center;
@@ -118,12 +117,10 @@ h1 {
 .line-number {
   display: inline-block;
   min-width: 20px;
-  color: #8fa6b4;
+  color: #8fa6b4; /* You might want to consider adding a new variable for this color */
 }
-label,
-input,
-textarea,
-button {
+
+label, input, textarea, button {
   display: block;
   width: 100%;
   margin-bottom: 20px;
@@ -134,13 +131,13 @@ button {
 
 button {
   cursor: pointer;
-  background-color: #21c978;
-  color: #fff;
+  background-color: var(--accent-color);
+  color: var(--white);
   border: none;
 }
 
 button:hover {
-  background-color: #1aa367;
+  background-color: #1aa367; /* You might want to consider adding a new variable for this color */
 }
 
 pre {
