@@ -79,7 +79,6 @@ main {
 .wrapper {
   max-width: 1280px;
   min-width: 50vw;
-  padding: 0 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -90,10 +89,12 @@ main {
   .wrapper {
     flex-direction: column;
     min-width: 100%;
+    align-items: center;
   }
 
   .text, .contentTwo {
     margin-bottom: 1rem;
+    text-align: center;
   }
 }
 

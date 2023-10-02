@@ -3,19 +3,28 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVe
 import type { UserSchema } from '../Firestore/UserSchema/UserDataSchema';
 import { createUser, getUser } from '../Firestore/UserSchema/UserOps';
 
+export interface AuthUser {
+    user?: UserSchema;
+    error?: string;
+}
+
+
 // registerUser function
 // This function takes in an email and password and creates a new user in Firebase Authentication.
 // It returns a promise that resolves with the user object.
 
-export const registerUser = async (email: string, password: string, userData:UserSchema) => {
+export const registerUser = async (email: string, password: string, userData:UserSchema): Promise<AuthUser> => {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         await createUser(user.uid, userData);
         await sendEmailVerification(user);
-        return userData;
+        const authUser = { user:userData, error: undefined };
+        return authUser;
     } catch (error:any) {
-        throw new Error(error.message);
+
+        const authUser = { user: undefined, error: error.message };
+        return authUser;
     }
 };
 
@@ -24,20 +33,26 @@ export const registerUser = async (email: string, password: string, userData:Use
 //This function takes in an email and password and signs in the user in Firebase Authentication.
 //It returns a promise that resolves with the user object.
 
-export const loginUser = async (email: string, password: string) => {
+export const loginUser = async (email: string, password: string): Promise<AuthUser> => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         const userVerified = user.emailVerified
         if (!userVerified) {
             await logoutUser();
-            throw new Error('Email not verified');
+            const authUser = { user: undefined, error: 'User is not verified' };
+            return authUser;
         }
         const userData = await getUser(user.uid);
+        if(!userData)
+        {
+            return { user: undefined, error: 'User not found in database' };
+        }
         localStorage.setItem('user', JSON.stringify(userData));
-        return userData;
+        return { user: userData, error: undefined };
     } catch (error:any) {
-        throw new Error(error.message);
+        const authUser = { user: undefined, error: error.message };
+        return authUser;
     }
 };
 

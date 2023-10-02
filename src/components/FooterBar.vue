@@ -4,12 +4,6 @@
       <a href="https://www.facebook.com/your_facebook_username" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
         <span class="material-icons">facebook</span>
       </a>
-      <a href="https://www.twitter.com/your_twitter_username" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-        <span class="material-icons">twitter</span>
-      </a>
-      <a href="https://www.linkedin.com/in/your_linkedin_username" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-        <span class="material-icons">linkedin</span>
-      </a>
     </div>
   </footer>
 </template>
@@ -28,19 +22,23 @@
   border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
+  align-items: center; /* Added to vertically center the content */
+  min-height: 60px; /* Optional: You can set a min-height for the footer */
 }
 
 .wrapper {
   display: flex;
-  align-items: center;
+  align-items: center; /* This will center align the links vertically */
   justify-content: space-around;
   padding: 1rem;
   box-sizing: border-box;
 }
 
 a {
-  color: var(--white); /* using white variable instead of #fff */
+  color: var(--white);
   text-decoration: none;
+  display: flex;
+  align-items: center; /* This keeps the span centered vertically inside a */
 }
 
 .material-icons {
@@ -49,13 +47,9 @@ a {
 
 @media (max-width: 600px) {
   .wrapper {
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  a {
-    margin-bottom: 0.5rem;
+    flex-direction: column; /* Stack links vertically on small screens */
   }
 }
+
 
 </style>

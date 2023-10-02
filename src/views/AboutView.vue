@@ -1,10 +1,12 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import TechStackCard from '@/components/TechStackCard.vue';
+import { useRouter } from 'vue-router';
 export default defineComponent({
   name: 'AboutView',
   components: { TechStackCard },
   setup() {
+    const router = useRouter();
     const techStacks = ref([
       'Unity',
       'Unreal',
@@ -16,7 +18,11 @@ export default defineComponent({
       'Java',
     ]);
 
-    return { techStacks };
+    const takeToContact = () => {
+      router.push('/contact');
+    };
+
+    return { techStacks, takeToContact };
   }
 });
 </script>
@@ -31,7 +37,7 @@ export default defineComponent({
         <div class="tech-stack-grid">
           <TechStackCard v-for="tech in techStacks" :key="tech" :stackName="tech" />
         </div>
-        <button class="btn-contact">
+        <button class="btn-contact" @click="takeToContact">
           Contact Me
         </button>
       </div>

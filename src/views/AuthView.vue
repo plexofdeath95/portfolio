@@ -1,19 +1,27 @@
 <template>
   <div class="auth-main">
     <div class="auth-wrapper">
+      <div v-if="errorMessage" class="message error">{{ errorMessage }}</div>
+      <div v-if="message" class="message success">{{ message }}</div>
       <h1 v-if="isLogin">Login</h1>
-      <h1 v-else>Register</h1>
+      <h1 v-else-if="!message">Register</h1>
 
-      <form @submit.prevent="submit" class="auth-form">
+      <form v-if="!message" @submit.prevent="submit" class="auth-form">
         <label for="email">Email:</label>
         <input v-model.trim="form.email" type="email" id="email" required />
-        <span v-if="!isEmailValid">Invalid email</span>
+     
 
         <label for="password">Password:</label>
         <input v-model="form.password" type="password" id="password" required />
 
         <label v-if="!isLogin" for="displayName">Display Name:</label>
-        <input v-if="!isLogin" v-model.trim="form.userDisplayName" type="text" id="displayName" required />
+        <input
+          v-if="!isLogin"
+          v-model.trim="form.userDisplayName"
+          type="text"
+          id="displayName"
+          required
+        />
 
         <label v-if="!isLogin" for="userType">User Type:</label>
         <select v-if="!isLogin" v-model="userType" id="userType">
@@ -24,7 +32,7 @@
         <button type="submit" :disabled="!isFormValid">{{ isLogin ? 'Login' : 'Register' }}</button>
       </form>
 
-      <button @click="toggleView">Switch to {{ isLogin ? 'Register' : 'Login' }}</button>
+      <button v-if="!message" @click="toggleView">Switch to {{ isLogin ? 'Register' : 'Login' }}</button>
     </div>
   </div>
 </template>
@@ -53,7 +61,8 @@ export default defineComponent({
       userType: UserType.user,
       userVerified: false
     })
-
+    const errorMessage = ref<string | null>(null)
+    const message= ref<string | null>(null)
     const userType = computed({
       get: () => UserType[form.value.userType],
       set: (value) => {
@@ -83,8 +92,12 @@ export default defineComponent({
       try {
         if (isLogin.value) {
           const userData = await loginUser(form.value.email, form.value.password)
-          router.push('/')
-          console.log('Logged in user data:', userData)
+          if (!userData.error) {
+            router.push('/')
+            console.log('Logged in user data:', userData)
+          } else {
+            errorMessage.value = userData.error
+          }
         } else {
           const userData: UserSchema = {
             userDisplayName: form.value.userDisplayName,
@@ -95,12 +108,11 @@ export default defineComponent({
           }
           const registeredUser = await registerUser(form.value.email, form.value.password, userData)
           console.log('Registered user data:', registeredUser)
-          //log them in
-          await loginUser(form.value.email, form.value.password)
-          router.push('/')
+          message.value = 'User registered successfully, please verify your email and login.'
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Auth Error', error)
+        errorMessage.value = error.message
       }
     }
 
@@ -108,8 +120,8 @@ export default defineComponent({
       isLogin.value = !isLogin.value
     }
 
-    return { form, isLogin, submit, isEmailValid, isFormValid, toggleView, userType, UserType }
-
+    return { form, isLogin, submit, isEmailValid, isFormValid, toggleView, userType, UserType,  errorMessage, 
+        message }
   }
 })
 </script>
@@ -168,6 +180,19 @@ button:hover {
 button {
   cursor: pointer;
   background-color: var(--accent-color);
+}
+.message {
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+}
+.error {
+    background-color: var(--error-bg, #ffdddd); /* You can use any variable or color */
+    color: var(--error-color, #dd0000);
+}
+.success {
+    background-color: var(--success-bg, #ddffdd); /* You can use any variable or color */
+    color: var(--success-color, #008800);
 }
 
 @media (max-width: 767px) {

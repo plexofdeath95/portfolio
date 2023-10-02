@@ -191,6 +191,7 @@ export default defineComponent({
   height: 100vh;
   background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1000; /* Ensure modal appears above other elements */
@@ -198,10 +199,17 @@ export default defineComponent({
 
 .modal-content {
   background: #fff;
+  width: 20%;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
   z-index: 1001; /* Ensure modal content appears above the modal background */
+}
+
+.modal-content button, .modal-content input {
+  margin: 10px;
 }
 
 

@@ -224,7 +224,7 @@ export default defineComponent({
 
   .show-menu {
     transform: translateX(0);
-    height:86%;
+    height:94vh;
   }
 }
 
