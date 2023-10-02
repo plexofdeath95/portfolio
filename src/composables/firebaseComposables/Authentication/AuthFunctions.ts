@@ -81,9 +81,9 @@ export const getCurrentUser = async () => {
             const userData = await getUser(user.uid);
             return userData;
         } else {
-            throw new Error('No user is signed in');
+            return null;
         }
     } catch (error:any) {
-        throw new Error(error.message);
+        return error.message;
     }
 };

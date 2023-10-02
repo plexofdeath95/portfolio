@@ -79,7 +79,6 @@ export default defineComponent({
   max-width: 800px;
   width: 100%;
   margin: auto;
-  padding: 2rem;
   text-align: center;
   border-radius: 20px;
   box-shadow: 0px 0px 15px 5px var(--shadow-color);
@@ -100,7 +99,7 @@ h1 {
     flex-direction: column;
   }
   .contact-wrapper {
-    min-width: 100%;
+    min-width: 90%;
   }
 }
 
@@ -137,9 +136,10 @@ label, input, textarea, button {
   display: block;
   width: 100%;
   margin-bottom: 20px;
-  padding: 10px;
+  min-height: 30px;
   font-size: 16px;
   border-radius: 8px;
+  resize: none;
 }
 
 button {
