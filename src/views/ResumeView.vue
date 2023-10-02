@@ -49,7 +49,6 @@ export default defineComponent({
                 <div v-if="activeSection === 'summary'">
                     <div class="comment-heading">/* Summary * /</div>
                     <h2>Hassan Farhat</h2>
-
                     <p>VIC, 3047</p>
                     <p>+61 0411 017 988</p>
                     <p>hassanfarhatcons@gmail.com</p>
