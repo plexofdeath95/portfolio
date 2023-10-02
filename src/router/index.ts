@@ -6,7 +6,9 @@ import ProjectsView from '../views/ProjectsView.vue'
 import AuthView from '../views/AuthView.vue'
 import BlogView from '../views/BlogView.vue'
 import ResumeView from '../views/ResumeView.vue'
-
+import CreateBlog from '../views/CreateBlog.vue'
+import BlogEntryView from '../views/BlogEntryView.vue'
+import EditBlog from '../views/EditBlog.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -36,9 +38,24 @@ const router = createRouter({
       component: AuthView
     },
     {
-      path: '/blog',
-      name: 'Blog',
+      path: '/blogs',
+      name: 'Blogs',
       component: BlogView
+    },
+    {
+      path: '/blogs/create',
+      name: 'CreateBlog',
+      component: CreateBlog
+    },
+    {
+      path: '/blogs/:id',
+      name: 'BlogEntry',
+      component: BlogEntryView
+    },
+    {
+      path: '/blogs/:id/edit',
+      name: 'EditBlog',
+      component: EditBlog
     },
     {
       path: '/resume',

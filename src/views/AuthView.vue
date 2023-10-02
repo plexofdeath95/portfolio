@@ -50,7 +50,8 @@ export default defineComponent({
       email: '',
       password: '',
       userDisplayName: '',
-      userType: UserType.user // Default to UserType.user, adjust as necessary
+      userType: UserType.user,
+      userVerified: false
     })
 
     const userType = computed({
@@ -89,7 +90,8 @@ export default defineComponent({
             userDisplayName: form.value.userDisplayName,
             userEmail: form.value.email,
             userUid: '', // This will be set when createUser is called
-            userType: form.value.userType
+            userType: form.value.userType,
+            userVerified: form.value.userVerified
           }
           const registeredUser = await registerUser(form.value.email, form.value.password, userData)
           console.log('Registered user data:', registeredUser)

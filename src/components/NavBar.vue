@@ -1,6 +1,6 @@
 <script lang="ts">
 import { ref, onMounted, onBeforeUnmount, defineComponent, computed, watchEffect } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import ItemLinkComponent from './ItemLinkComponent.vue'
 import { getCurrentUser, logoutUser } from '@/composables/firebaseComposables/Authentication/AuthFunctions'
 import type { UserSchema } from '@/composables/firebaseComposables/Firestore/UserSchema/UserDataSchema'
@@ -10,6 +10,7 @@ export default defineComponent({
   components: { ItemLinkComponent },
   setup() {
     const route = useRoute()
+    const router = useRouter();
     const currentRoute = ref(route.path)
     const currentUser = ref<UserSchema | null>(null)
     const isMobile = ref(window.innerWidth <= 768)
@@ -43,7 +44,7 @@ export default defineComponent({
       '/contact': '_contact-me',
       '/Projects': '_projects',
       '/resume': '_resume',
-      '/blog': '_blog',
+      '/blogs': '_blogs',
       '/auth': '_login'
     }
 
@@ -53,7 +54,7 @@ export default defineComponent({
       '/contact': '/contact',
       '/Projects': '/Projects',
       '/resume': '/resume',
-      '/blog': '/blog',
+      '/blogs': '/blogs',
       '/auth': '/auth'
     }
 
@@ -64,7 +65,7 @@ export default defineComponent({
         '/contact': currentRoute.value === '/contact',
         '/Projects': currentRoute.value === '/Projects',
         '/resume': currentRoute.value === '/resume',
-        '/blog': currentRoute.value === '/blog',
+        '/blogs': currentRoute.value === '/blogs',
         '/auth': currentRoute.value === '/auth'
       }
     })
@@ -72,6 +73,7 @@ export default defineComponent({
     const logOut = async () => {
       await logoutUser()
       currentUser.value = null
+      router.push('/')
     }
     
     return { 
@@ -102,9 +104,9 @@ export default defineComponent({
         @item-clicked="toggleMenu"
       />
       <ItemLinkComponent
-        :link="routeLink['/about']"
-        :text="routeText['/about']"
-        :selected="routeSelected['/about']"
+        :link="routeLink['/resume']"
+        :text="routeText['/resume']"
+        :selected="routeSelected['/resume']"
         @item-clicked="toggleMenu"
       />
       <ItemLinkComponent
@@ -113,6 +115,20 @@ export default defineComponent({
         :selected="routeSelected['/Projects']"
         @item-clicked="toggleMenu"
       />
+
+      <ItemLinkComponent
+        :link="routeLink['/blogs']"
+        :text="routeText['/blogs']"
+        :selected="routeSelected['/blogs']"
+        @item-clicked="toggleMenu"
+      />
+      <ItemLinkComponent
+        :link="routeLink['/about']"
+        :text="routeText['/about']"
+        :selected="routeSelected['/about']"
+        @item-clicked="toggleMenu"
+      />
+
       <ItemLinkComponent
         :link="routeLink['/contact']"
         :text="routeText['/contact']"
@@ -120,19 +136,9 @@ export default defineComponent({
         @item-clicked="toggleMenu"
       />
       
-      <ItemLinkComponent
-        :link="routeLink['/resume']"
-        :text="routeText['/resume']"
-        :selected="routeSelected['/resume']"
-        @item-clicked="toggleMenu"
-      />
+  
 
-      <ItemLinkComponent
-        :link="routeLink['/blog']"
-        :text="routeText['/blog']"
-        :selected="routeSelected['/blog']"
-        @item-clicked="toggleMenu"
-      />
+
 
       <div v-if="currentUser">
         <button @click="logOut">Logout</button>
@@ -154,7 +160,6 @@ export default defineComponent({
   background-color: var(--primary-bg);
   height: 56px;
   width: 100%;
-  position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
@@ -191,6 +196,7 @@ export default defineComponent({
     padding-top: 0; /* No padding top */
     height: 56px; /* height of navbar */
     width: auto;
+    z-index: 200;
   }
 
   .show-menu {
@@ -210,9 +216,10 @@ export default defineComponent({
     top: 0;
     left: 0;
     background-color: var(--primary-bg);
-    padding-top: 56px; /* height of navbar */
+    padding-top: 56px; 
     width: 100%;
     height: 100%;
+    z-index: 200;
   }
 
   .show-menu {
@@ -236,7 +243,7 @@ button:hover {
 
 .menu-toggle {
   cursor: pointer;
-  z-index: 200;
+  z-index: 201;
   padding: 15px;
   color: var(--white);
   border: none;

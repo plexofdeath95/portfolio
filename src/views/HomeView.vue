@@ -143,5 +143,6 @@ main {
 .typewriter-enter, .typewriter-leave-to {
   opacity: 0;
 }
+
 </style>
 

@@ -11,4 +11,5 @@ export interface UserSchema
     userEmail:string,
     userUid:string
     userType:UserType
+    userVerified:boolean
 }

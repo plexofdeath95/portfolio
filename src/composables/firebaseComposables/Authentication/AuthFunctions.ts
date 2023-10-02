@@ -1,7 +1,8 @@
 import {auth} from '@/firebase/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification  } from 'firebase/auth';
 import type { UserSchema } from '../Firestore/UserSchema/UserDataSchema';
 import { createUser, getUser } from '../Firestore/UserSchema/UserOps';
+
 // registerUser function
 // This function takes in an email and password and creates a new user in Firebase Authentication.
 // It returns a promise that resolves with the user object.
@@ -11,6 +12,7 @@ export const registerUser = async (email: string, password: string, userData:Use
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         await createUser(user.uid, userData);
+        await sendEmailVerification(user);
         return userData;
     } catch (error:any) {
         throw new Error(error.message);
@@ -26,7 +28,13 @@ export const loginUser = async (email: string, password: string) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+        const userVerified = user.emailVerified
+        if (!userVerified) {
+            await logoutUser();
+            throw new Error('Email not verified');
+        }
         const userData = await getUser(user.uid);
+        localStorage.setItem('user', JSON.stringify(userData));
         return userData;
     } catch (error:any) {
         throw new Error(error.message);
@@ -40,6 +48,7 @@ export const loginUser = async (email: string, password: string) => {
 export const logoutUser = async () => {
     try {
         await auth.signOut();
+        localStorage.removeItem('user');
     } catch (error:any) {
         throw new Error(error.message);
     }

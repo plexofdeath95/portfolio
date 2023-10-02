@@ -65,4 +65,3 @@ export default defineComponent({
     padding: 20px;
   }
   </style>
-  @/composables/firebase/Firestore/ProjectsSchema/ProjectSchemas@/composables/firebase/Firestore/ProjectsSchema/ProjectOps
